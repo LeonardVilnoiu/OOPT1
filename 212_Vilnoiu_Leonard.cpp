@@ -6,17 +6,14 @@ using namespace std;
 class Vector{
 
 private:
-    int v[100], n;
+    int v[1000], n;
 public:
         Vector(int n = 0){
             this->n=n;
         }
-        void initnr(int nr,int val){
-            int i;
-            this->n=nr;
-            for(i = 0; i < nr; i++)
-                this->v[i] = val;
-        }
+
+        void initnr(int nr,int val);
+
         Vector(Vector& v){
             int i;
             for(i=0;i<n;i++)
@@ -26,65 +23,94 @@ public:
         ~Vector(){
             n = 0;
         }
-        Vector &operator =(Vector &a){
-            int i;
-            for(i=0;i<n;i++)
-                this->v[i]= a.v[i];
-            this->n = a.n;
-        }
-        int sumaelem(){
-            int i,s=0;
-            for(i=0;i<n;i++)
-                s+=this->v[i];
-            return s;
-        }
-        int maxpoz(){
-            int vmax,poz,i;
-            vmax=this->v[0];
-            poz=0;
-            for(i=1;i<n;i++)
-                if(this->v[i]>vmax){
-                    vmax=this->v[i];
-                    poz=i;
-                }
-            return poz;
-        }
-        void sortare(){
-            int i,j,aux;
-            for(i=0;i<n-1;i++)
-                for(j=i+1;j<n;j++)
-                    if(this->v[i]>this->v[j])
-                    {
-                        aux=this->v[i];
-                        this->v[i]=this->v[j];
-                        this->v[j]=aux;
-                    }
-        }
-        void afisare(ostream &out){
-            for(int i=0;i<n;i++)
-                out<<this->v[i]<<" ";
-        }
-        void citire(istream &f){
-            for(int i=0;i<n;i++)
-                f>>this->v[i];
-        }
-        friend istream &operator>>(istream &in, Vector &v){
-            v.citire(in);
-        }
-        friend ostream &operator<<(ostream &out, Vector &v){
-            v.afisare(out);
-        }
-        int operator[](int index){
-            return this->v[index];
-        }
-        void setVal(int nr){
-            n = nr;
-        }
-        int getVal(){
-            return n;
-        }
 
+        Vector &operator =(Vector &a);
+
+        int sumaelem();
+
+        int maxpoz();
+
+        void sortare();
+
+        void afisare(ostream &out);
+
+        void citire(istream &f);
+
+        friend istream &operator>>(istream &in, Vector &v);
+
+        friend ostream &operator<<(ostream &out, Vector &v);
+
+        int operator[](int index);
+
+        void setVal(int nr);
+
+        int getVal();
 };
+
+void Vector::initnr(int nr,int val){
+    int i;
+    this->n=nr;
+    for(i = 0; i < nr; i++)
+        this->v[i] = val;
+}
+Vector &Vector::operator =(Vector &a){
+    int i;
+    for(i=0;i<n;i++)
+        this->v[i]= a.v[i];
+    this->n = a.n;
+}
+int Vector::sumaelem(){
+    int i,s=0;
+    for(i=0;i<n;i++)
+        s+=this->v[i];
+    return s;
+}
+int Vector::maxpoz(){
+    int vmax,poz,i;
+    vmax=this->v[0];
+    poz=0;
+    for(i=1;i<n;i++)
+        if(this->v[i]>vmax){
+            vmax=this->v[i];
+            poz=i;
+        }
+    return poz;
+}
+void Vector::sortare(){
+    int i,j,aux;
+    for(i=0;i<n-1;i++)
+        for(j=i+1;j<n;j++)
+            if(this->v[i]>this->v[j])
+            {
+                aux=this->v[i];
+                this->v[i]=this->v[j];
+                this->v[j]=aux;
+            }
+}
+void Vector::afisare(ostream &out){
+    for(int i=0;i<n;i++)
+        out<<this->v[i]<<" ";
+}
+void Vector::citire(istream &f){
+    for(int i=0;i<n;i++)
+        f>>this->v[i];
+}
+istream &operator>>(istream &in, Vector &v){
+    v.citire(in);
+}
+ostream &operator<<(ostream &out, Vector &v){
+    v.afisare(out);
+}
+int Vector::operator[](int index){
+    return this->v[index];
+}
+void Vector::setVal(int nr){
+    n = nr;
+}
+int Vector::getVal(){
+    return n;
+}
+
 
 
 int main()
